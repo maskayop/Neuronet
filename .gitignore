@@ -1,0 +1,10 @@
+.vsconfig
+Assembly-CSharp.csproj
+Assembly-CSharp.Player.csproj
+Neuronet.sln
+.vs/
+Library/
+UserSettings/
+Temp/
+Logs/
+obj/
