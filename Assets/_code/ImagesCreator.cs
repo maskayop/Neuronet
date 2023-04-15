@@ -16,19 +16,30 @@ namespace Maskayop
         List<GameObject> imageObjects = new List<GameObject>();
         List<PixelImage> pixelImages = new List<PixelImage>();
 
-        public void CreatePictureImages(int height, int width, Color32[,] pictureMatrix)
+        public void CreatePictureImages(int height, int width, Color32[,] pictureMatrix, string containerName)
         {
             foreach (Transform t in imagesContainer)
-                Destroy(t.gameObject);
+            {
+                if(t.name == containerName)
+                    Destroy(t.gameObject);
+            }
 
             imageObjects.Clear();
             pixelImages.Clear();
+
+            GameObject container = new GameObject(containerName);
+            container.transform.SetParent(imagesContainer);
+
+            RectTransform containerTransform = container.AddComponent<RectTransform>();
+            containerTransform.anchorMin = Vector2.zero;
+            containerTransform.anchorMax = Vector2.one;
+            containerTransform.sizeDelta = containerTransform.anchoredPosition = Vector2.zero;
 
             for (int h = 0; h < height; h++)
             {
                 for (int w = 0; w < width; w++)
                 {
-                    GameObject newGO = Instantiate(pixelImagePrefab, imagesContainer);
+                    GameObject newGO = Instantiate(pixelImagePrefab, containerTransform);
                     newGO.name = "Image - " + h + ":" + w;
                     imageObjects.Add(newGO);
 

@@ -6,6 +6,12 @@ namespace Maskayop
 {
     public class Convoluter : MonoBehaviour
     {
+        bool finished = false;
+        public bool Finished => finished;
 
+        public void Init()
+        {
+
+        }
     }
 }

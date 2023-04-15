@@ -19,7 +19,6 @@ namespace Maskayop
         public int mipMapPixelsCount = 0;
 
         bool finished = false;
-
         public bool Finished => finished;
 
         public void Init()

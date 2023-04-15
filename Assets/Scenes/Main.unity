@@ -1538,12 +1538,16 @@ MonoBehaviour:
   timeStep: 1
   timePassed: 0
   pictureSplitter: {fileID: 1818070941}
+  picturePreparator: {fileID: 1818070942}
   imagesCreator: {fileID: 1193561760}
+  coresController: {fileID: 1726383801}
   convoluter: {fileID: 24782120}
   actions:
   - action: 0
+    additionalPadding: 0
     visualize: 1
   - action: 1
+    additionalPadding: 1
     visualize: 1
   currentAction: 0
 --- !u!4 &1334266468
@@ -2043,8 +2047,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1726383800}
   - component: {fileID: 1726383799}
+  - component: {fileID: 1726383801}
   m_Layer: 0
-  m_Name: Cores Visual Creator
+  m_Name: Convolution Cores
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2064,19 +2069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   convolutionCoresVisualContainer: {fileID: 310258382}
   convolutionVisualPrefab: {fileID: 4667117283833826332, guid: 1c14eff8dec95434587d051479057eb3, type: 3}
-  convolutionCores:
-  - name: R filter 1
-    size: 3
-    values: 0100000000000000ffffffff000000000100000000000000ffffffff0000000001000000
-    cells: []
-  - name: G filter 1
-    size: 3
-    values: ffffffff000000000100000000000000ffffffff000000000100000000000000ffffffff
-    cells: []
-  - name: B filter 1
-    size: 3
-    values: 000000000100000000000000ffffffff000000000100000000000000ffffffff00000000
-    cells: []
+  coresController: {fileID: 1726383801}
 --- !u!4 &1726383800
 Transform:
   m_ObjectHideFlags: 0
@@ -2092,6 +2085,31 @@ Transform:
   m_Father: {fileID: 264230750}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1726383801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726383798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26122cc2a5ee305488f06dcfbfbf973f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  convolutionCores:
+  - name: R filter - 1
+    size: 3
+    values: ffffffff000000000100000000000000ffffffff000000000100000000000000ffffffff
+    cells: []
+  - name: G filter - 1
+    size: 3
+    values: 0100000000000000ffffffff000000000100000000000000ffffffff0000000001000000
+    cells: []
+  - name: B filter - 1
+    size: 3
+    values: 0000000001000000000000000100000000000000ffffffff00000000ffffffff00000000
+    cells: []
 --- !u!1 &1792851703
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,8 +2156,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1818070940}
   - component: {fileID: 1818070941}
+  - component: {fileID: 1818070942}
   m_Layer: 0
-  m_Name: Picture Splitter
+  m_Name: Picture Processor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2172,12 +2191,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578f92ca6702fab468d0dcbc477bde3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mipLevel: 2
+  mipLevel: 3
   picture: {fileID: 2800000, guid: da547ec4d7756124a801fd05db300676, type: 3}
   pixelsCount: 0
   height: 0
   width: 0
   mipMapPixelsCount: 0
+--- !u!114 &1818070942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818070939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d038f6f9bf4b22e4d9136eae43e4c2ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  padding: 0
 --- !u!1 &1957150045
 GameObject:
   m_ObjectHideFlags: 0

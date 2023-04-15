@@ -3,13 +3,12 @@ using UnityEngine;
 
 namespace Maskayop
 {
-    public class ConvolutionCoresVisualCreator : MonoBehaviour
+    public class ConvolutionCoresVisualiser : MonoBehaviour
     {
         [SerializeField] Transform convolutionCoresVisualContainer;
         [SerializeField] GameObject convolutionVisualPrefab;
-
-        public List<ConvolutionCore> convolutionCores = new List<ConvolutionCore>();
-
+        [SerializeField] ConvolutionCoresController coresController;
+        
         List<Transform> coresVisualTransforms = new List<Transform>();
 
         public void CreateConvolutionCoresVisual()
@@ -17,14 +16,14 @@ namespace Maskayop
             foreach (Transform t in convolutionCoresVisualContainer.transform)
                 Destroy(t.gameObject);
 
-            foreach (var cc in convolutionCores)
+            foreach (var cc in coresController.convolutionCores)
                 cc.cells.Clear();
 
             coresVisualTransforms.Clear();
 
-            for (int i = 0; i < convolutionCores.Count; i++)
+            for (int i = 0; i < coresController.convolutionCores.Count; i++)
             {
-                GameObject newCore = new GameObject("Core - " + convolutionCores[i].name);
+                GameObject newCore = new GameObject("Core - " + coresController.convolutionCores[i].name);
                 newCore.transform.SetParent(convolutionCoresVisualContainer.transform);
 
                 RectTransform rt = newCore.AddComponent<RectTransform>();
@@ -36,7 +35,7 @@ namespace Maskayop
                 coresVisualTransforms.Add(rt);
                 newCore.SetActive(false);
 
-                CreateCoreCells(convolutionCores[i], rt);
+                CreateCoreCells(coresController.convolutionCores[i], rt);
             }
         }
 
@@ -61,25 +60,25 @@ namespace Maskayop
 
         public void ShowAllCores()
         {
-            for (int i = 0; i < convolutionCores.Count; i++)
+            for (int i = 0; i < coresController.convolutionCores.Count; i++)
                 ShowCore(i);
         }
 
         public void HideAllCores()
         {
-            for (int i = 0; i < convolutionCores.Count; i++)
+            for (int i = 0; i < coresController.convolutionCores.Count; i++)
                 HideCore(i);
         }
 
         void ShowCore(int id)
         {
-            foreach (GameObject g in convolutionCores[id].cells)
+            foreach (GameObject g in coresController.convolutionCores[id].cells)
                 g.SetActive(true);
         }
 
         void HideCore(int id)
         {
-            foreach (GameObject g in convolutionCores[id].cells)
+            foreach (GameObject g in coresController.convolutionCores[id].cells)
                 g.SetActive(false);
         }
     }

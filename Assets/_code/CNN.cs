@@ -11,11 +11,16 @@ namespace Maskayop
         public float timePassed = 0;
 
         public PictureSplitter pictureSplitter;
+        public PicturePreparator picturePreparator;
         public ImagesCreator imagesCreator;
+        public ConvolutionCoresController coresController;
         public Convoluter convoluter;
 
         public List<Action> actions = new List<Action>();
         public int currentAction = 0;
+
+        Color32[,] currentMatrix;
+        public Color32[,] Matrix => currentMatrix;
 
         bool go = false;
         float currentTime = 0;
@@ -52,6 +57,9 @@ namespace Maskayop
                 case Action.ActionType.PictureSplitting:
                     SplitPicture();
                     break;
+                case Action.ActionType.PicturePreparation:
+                    PreparePicture();
+                    break;
                 case Action.ActionType.Convolution:
                     Convolute();
                     break;
@@ -70,9 +78,27 @@ namespace Maskayop
             if (!pictureSplitter.Finished)
             {
                 pictureSplitter.Init();
+                currentMatrix = pictureSplitter.pictureMatrix;
 
                 if (actions[currentAction].visualize)
-                    imagesCreator.CreatePictureImages(pictureSplitter.height, pictureSplitter.width, pictureSplitter.pictureMatrix);
+                    imagesCreator.CreatePictureImages(pictureSplitter.height, pictureSplitter.width, currentMatrix, "Splitted Picture");
+            }
+            else
+                currentAction++;
+        }
+
+        void PreparePicture()
+        {
+            if (!picturePreparator.Finished)
+            {
+                picturePreparator.padding = actions[currentAction].additionalPadding;
+                picturePreparator.pictureMatrix = currentMatrix;
+                picturePreparator.Init();
+                currentMatrix = picturePreparator.Matrix;
+
+                if (actions[currentAction].visualize)
+                    imagesCreator.CreatePictureImages(picturePreparator.Matrix.GetLength(0), picturePreparator.Matrix.GetLength(1), currentMatrix, 
+                                                      new string("Prepared Picture " + currentAction.ToString()));
             }
             else
                 currentAction++;
@@ -80,7 +106,7 @@ namespace Maskayop
 
         void Convolute()
         {
-            currentAction++;
+            
         }
     }
 }
