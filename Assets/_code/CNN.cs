@@ -106,7 +106,20 @@ namespace Maskayop
 
         void Convolute()
         {
-            
+            if (!convoluter.Finished)
+            {
+                if(convoluter.GetCurrentAction() != actions[currentAction])
+                {
+                    convoluter.coresController = coresController;
+                    convoluter.CalculateConvolutionCoresIDs(actions[currentAction].coresInterval);
+                    convoluter.pictureMatrix = currentMatrix;
+                    convoluter.InitAction(actions[currentAction]);
+                }
+
+                convoluter.Convolute();
+            }
+            else
+                currentAction++;
         }
     }
 }

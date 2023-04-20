@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c177380565fbd944296a5a9101de7a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visualiser: {fileID: 1726383799}
+  coresController: {fileID: 1726383801}
 --- !u!1 &86893992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1535,7 +1537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spentTimeText: {fileID: 1444906852}
-  timeStep: 1
+  timeStep: 0.5
   timePassed: 0
   pictureSplitter: {fileID: 1818070941}
   picturePreparator: {fileID: 1818070942}
@@ -1545,9 +1547,15 @@ MonoBehaviour:
   actions:
   - action: 0
     additionalPadding: 0
+    coresInterval: 
     visualize: 1
   - action: 1
     additionalPadding: 1
+    coresInterval: 
+    visualize: 1
+  - action: 2
+    additionalPadding: 0
+    coresInterval: 0-5
     visualize: 1
   currentAction: 0
 --- !u!4 &1334266468
@@ -2098,17 +2106,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   convolutionCores:
-  - name: R filter - 1
+  - name: R filter 1
     size: 3
+    filterColor: 0
     values: ffffffff000000000100000000000000ffffffff000000000100000000000000ffffffff
     cells: []
-  - name: G filter - 1
+  - name: G filter 1
     size: 3
+    filterColor: 1
     values: 0100000000000000ffffffff000000000100000000000000ffffffff0000000001000000
     cells: []
-  - name: B filter - 1
+  - name: B filter 1
     size: 3
+    filterColor: 2
     values: 0000000001000000000000000100000000000000ffffffff00000000ffffffff00000000
+    cells: []
+  - name: R filter 2
+    size: 3
+    filterColor: 0
+    values: 01000000000000000000000000000000ffffffff00000000000000000000000001000000
+    cells: []
+  - name: G filter 2
+    size: 3
+    filterColor: 1
+    values: 000000000100000000000000000000000000000000000000000000000100000000000000
+    cells: []
+  - name: B filter 2
+    size: 3
+    filterColor: 2
+    values: ffffffff00000000000000000000000001000000000000000000000000000000ffffffff
     cells: []
 --- !u!1 &1792851703
 GameObject:

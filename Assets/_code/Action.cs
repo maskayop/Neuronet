@@ -15,6 +15,8 @@ namespace Maskayop
 
         public ActionType action;
         public int additionalPadding = 0;
+        public string coresInterval;
+        public int convolutionStep = 1;
         public bool visualize = false;
     }
 }
